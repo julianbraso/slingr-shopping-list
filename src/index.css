@@ -1,0 +1,40 @@
+:root {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.mainContainer {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.center {
+  display: flex;
+  place-items: center;
+  justify-content: center;
+}
+
+.bodyContainer {
+  flex-grow: 1;
+}
+
+.emptyListContainer {
+  margin-bottom: 10rem;
+  display: flex;
+  flex-direction: column;
+  padding: 7rem 12rem;
+  border: 1.5px solid;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.emptyListMsg {
+  color: #87898c;
+}
