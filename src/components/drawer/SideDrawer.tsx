@@ -1,4 +1,5 @@
 import { Box, Button, Drawer, Typography } from "@mui/material"
+import theme from "../../mui-theme/theme";
 
 interface SideDrawerProps {
     isOpen: boolean;
@@ -31,7 +32,7 @@ const SideDrawer: React.FC<SideDrawerProps> = ({ isOpen, onClose, children }) =>
             sx={{
                 width: '100%',
                 height: '5px',
-                bgcolor: '#4D81B7',
+                bgcolor: theme.palette.primary.main,
                 mt: 'auto',
             }}
         />

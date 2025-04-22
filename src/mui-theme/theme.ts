@@ -9,6 +9,14 @@ const theme = createTheme({
                 },
             },
         },
+        MuiCheckbox: {
+            styleOverrides: {
+                root: {
+                    // Add default color for the checkbox
+                    color: '#c6c6c6', // default checkbox color
+                },
+            },
+        },
     },
     palette: {
         primary: {

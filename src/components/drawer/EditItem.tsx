@@ -1,4 +1,5 @@
 import { Box, Button, Checkbox, FormControl, FormControlLabel, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material"
+import theme from "../../mui-theme/theme";
 
 interface Props {
   cancelCallback: () => void;
@@ -61,7 +62,7 @@ export const EditItem: React.FC<Props> = ({cancelCallback}) => {
           <MenuItem value={3}>3</MenuItem>
         </Select>
       </FormControl>
-      <FormControlLabel control={<Checkbox sx={{color:'#C6C6C6'}} />} label={<Typography sx={{color:'#9CA8B4'}}>Purchased</Typography>} />
+      <FormControlLabel control={<Checkbox sx={{color:theme.palette.divider}} />} label={<Typography sx={{color:'#9CA8B4'}}>Purchased</Typography>} />
     </Box>
     <Box className='center' sx={{ mt: 'auto', ml: 'auto', pb:'20px', gap:'10px'}}>
       <Button
