@@ -6,19 +6,17 @@ from sqlalchemy.orm import sessionmaker, declarative_base
 
 connection_url = os.getenv('DATABASE_URL')
 
-IS_PRODUCTION = os.getenv("ENV") != "dev"
-
-engine = create_async_engine(connection_url, connect_args={"statement_cache_size": 0} if IS_PRODUCTION else {})
+engine = create_async_engine(
+    connection_url,
+    pool_pre_ping=True
+)
 
 SessionLocal = async_sessionmaker(
-    autocommit=False, expire_on_commit=False, bind=engine, class_=AsyncSession)
+    autocommit=False, autoflush=False, bind=engine, class_=AsyncSession)
 
 Base = declarative_base()
 
 
 async def get_db():
-    db = SessionLocal()
-    try:
+    async with SessionLocal() as db:
         yield db
-    finally:
-        await db.close()
