@@ -18,7 +18,7 @@ export const DeleteItemModal = ({ open, item, cancelCallback }: Props) => {
     const removeItem = () => {
         setIsLoading(true);
         deleteItem(item)
-            .then((v) => {
+            .then(() => {
                 cancelCallback && cancelCallback();
             })
             .catch((er) => console.log(er))

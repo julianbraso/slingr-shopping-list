@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import { LoadingSpinner } from "../components/misc/LoadingSpinner";
 import EmptyListMsg from "../components/list/EmptyListMsg";
 import { ItemList } from "../components/list/ItemList";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { AppContext } from "../context/AppContext";
 
 export const ItemsView = () => {

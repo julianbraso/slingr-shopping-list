@@ -20,7 +20,7 @@ export const EditItem: React.FC<Props> = ({ cancelCallback, itemToEdit }) => {
   const editItem = () => {
     setIsLoading(true);
     updateItem(item)
-      .then((v) => {
+      .then(() => {
         cancelCallback();
       })
       .catch((er) => console.log(er))

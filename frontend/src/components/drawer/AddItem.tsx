@@ -24,7 +24,7 @@ export const AddItem: React.FC<Props> = ({ cancelCallback }) => {
   const addItem = () => {
     setIsLoading(true);
     createItem(item)
-      .then((v) => {
+      .then(() => {
         setItem(emptyItem);
         cancelCallback();
       })
