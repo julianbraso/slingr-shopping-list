@@ -1,16 +1,16 @@
 import { Box } from '@mui/material'
 import NavBar from './components/nav/NavBar'
-import { DrawerContextProvider } from './context/DrawerContext'
+import { AppContextProvider } from './context/AppContext'
 import { ItemsView } from './views/ItemsView'
 
 function App() {
   return (
-    <DrawerContextProvider>
+    <AppContextProvider>
       <Box className='mainContainer'>
         <NavBar />
         <ItemsView />
       </Box>
-    </DrawerContextProvider>
+    </AppContextProvider>
   )
 }
 

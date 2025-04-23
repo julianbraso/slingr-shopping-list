@@ -24,12 +24,17 @@ export const createItem = async (item: Item) => {
     return data;
 }
 
-export const updateItem = async (item: Item) => {
+export const updateItem = async (item: Item, body?: Object) => {
     const response = await fetch(`${API_URL}/${item.id}`, {
         method: 'PATCH',
         headers: reusableHeaders,
-        body: JSON.stringify(item),
+        body: JSON.stringify(body ?? item),
     });
+    if (!response.ok) {
+        const error = await response.text();
+        console.error("Update failed:", error);
+        throw new Error(`Failed to update item: ${response.statusText}`);
+    }
     const data = await response.json();
     console.log(data);
     return data;

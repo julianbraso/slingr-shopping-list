@@ -2,14 +2,14 @@ import { Box, Button, Stack, Typography } from "@mui/material";
 import { Item } from "../../types/types";
 import { ItemComponent } from "./Item";
 import { useContext } from "react";
-import { DrawerContext } from "../../context/DrawerContext";
+import { AppContext } from "../../context/AppContext";
 
 interface ListProps {
     items: Item[]
 }
 
 const Header = () => {
-    const drawerContext = useContext(DrawerContext);
+    const appContext = useContext(AppContext);
 
     return <Box alignItems={'end'} display={'flex'} justifyContent={'space-between'} mb={1.5}>
         <Typography
@@ -20,7 +20,7 @@ const Header = () => {
             Your Items
         </Typography>
         <Button
-            onClick={() => drawerContext?.openDrawer('add')}
+            onClick={() => appContext?.openDrawer('add')}
             variant="contained"
             disableElevation={true}
             color='secondary'

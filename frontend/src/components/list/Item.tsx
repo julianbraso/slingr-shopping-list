@@ -1,8 +1,9 @@
 import { Box, Card, Checkbox, IconButton, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import theme from "../../mui-theme/theme";
 import { Item } from "../../types/types";
-import { useContext } from "react";
-import { DrawerContext } from "../../context/DrawerContext";
+import { useContext, useState } from "react";
+import { AppContext } from "../../context/AppContext";
+import { updateItem } from "../../utils/api";
 
 interface ItemProps {
     item: Item;
@@ -15,7 +16,8 @@ const removeMarginPadding = {
 }
 
 export const ItemComponent: React.FC<ItemProps> = ({ item, n }) => {
-    const drawerContext = useContext(DrawerContext);
+    const [loading, setLoading] = useState(false);
+    const appContext = useContext(AppContext);
     return <Card
         elevation={0}
         key={n}
@@ -23,6 +25,8 @@ export const ItemComponent: React.FC<ItemProps> = ({ item, n }) => {
             paddingY: 1.5,
             border: !item.purchased ? '1px solid #D5DFE9' : 'transparent',
             backgroundColor: item.purchased ? 'rgba(213, 223, 233, 0.17)' : 'transparent',
+            pointerEvents: loading ? 'none' : 'auto',
+            opacity: loading ? '30%' : '100%'
         }}
     >
         <ListItem
@@ -31,13 +35,13 @@ export const ItemComponent: React.FC<ItemProps> = ({ item, n }) => {
                 <Box display={'flex'} sx={{ width: '4rem', justifyContent: 'space-between' }}>
                     <IconButton aria-label="edit"
                         sx={removeMarginPadding}
-                        onClick={() => drawerContext?.openDrawer('edit', item)}
+                        onClick={() => appContext?.openDrawer('edit', item)}
                     >
                         <div className="material-icons-outlined" style={{ color: '#555F7C', fontSize: '23px' }}>edit</div>
                     </IconButton>
                     <IconButton aria-label="delete"
                         sx={removeMarginPadding}
-                        onClick={() => drawerContext?.openDelete(item)}
+                        onClick={() => appContext?.openDelete(item)}
                     >
                         <div className="material-icons-outlined" style={{ color: '#555F7C', fontSize: '23px' }}>delete</div>
                     </IconButton>
@@ -56,6 +60,11 @@ export const ItemComponent: React.FC<ItemProps> = ({ item, n }) => {
                 <Checkbox
                     edge="start"
                     checked={item.purchased}
+                    onClick={() => {
+                        setLoading(true)
+                        updateItem(item, {purchased: !item.purchased})
+                            .finally(() => appContext?.getItems(true).finally(()=>setLoading(false)));
+                    }}
                     tabIndex={-1}
                     disableRipple
                     size="medium"
