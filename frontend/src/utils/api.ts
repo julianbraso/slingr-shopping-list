@@ -1,6 +1,6 @@
 import { Item } from "../types/types";
 
-const API_URL = `${import.meta.env.VITE_API_URL}/items`;
+const API_URL = `${import.meta.env.VITE_API_URL}/items/`;
 
 const reusableHeaders = {
     'Content-Type': 'application/json',
@@ -25,7 +25,7 @@ export const createItem = async (item: Item) => {
 }
 
 export const updateItem = async (item: Item, body?: Object) => {
-    const response = await fetch(`${API_URL}/${item.id}`, {
+    const response = await fetch(`${API_URL}${item.id}`, {
         method: 'PATCH',
         headers: reusableHeaders,
         body: JSON.stringify(body ?? item),
@@ -41,7 +41,7 @@ export const updateItem = async (item: Item, body?: Object) => {
 }
 
 export const deleteItem = async (item: Item) => {
-    const response = await fetch(`${API_URL}/${item.id}`, {
+    const response = await fetch(`${API_URL}${item.id}`, {
         method: 'DELETE',
         headers: reusableHeaders
       });
