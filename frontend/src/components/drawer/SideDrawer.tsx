@@ -8,10 +8,17 @@ interface SideDrawerProps {
 }
 
 const SideDrawer: React.FC<SideDrawerProps> = ({ isOpen, onClose, children }) => {
-    return <Drawer anchor="right" open={isOpen} sx={{ width: '560px' }}>
+    return <Drawer anchor="right" open={isOpen} slotProps={{
+        paper: {
+            sx: {
+                width: '100%',
+                maxWidth: 560,
+            }
+        }
+    }}>
         <Box
             className="center"
-            sx={{ width: '560px', height: '64px', backgroundColor: '#FAFAFA', justifyContent: 'space-between', px: '20px' }}>
+            sx={{ width: 'auto', height: '64px', backgroundColor: '#FAFAFA', justifyContent: 'space-between', px: '20px' }}>
             <Typography color='#5C6269' sx={{ fontFamily: `'Dosis', sans-serif`, fontSize: '18px', fontWeight: '600', letterSpacing: '0.25px', lineHeight: '100%', textTransform: 'uppercase' }}>
                 Shopping List
             </Typography>
@@ -36,6 +43,7 @@ const SideDrawer: React.FC<SideDrawerProps> = ({ isOpen, onClose, children }) =>
                 mt: 'auto',
             }}
         />
+
     </Drawer>
 }
 

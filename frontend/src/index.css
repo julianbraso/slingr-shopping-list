@@ -28,9 +28,19 @@ body {
 .emptyListContainer {
   display: flex;
   flex-direction: column;
-  padding: 7rem 12rem;
+  max-width: 615px;
+  width: 100%;
+  padding: 7rem 0 7rem 0;
   border: 1.5px solid;
   gap: 14px;
+}
+
+@media (max-width: 480px) {
+  .emptyListContainer {
+    max-width: 300px;
+    width: 100%;
+    padding: 4rem 1rem;
+  }
 }
 
 .emptyListMsg {

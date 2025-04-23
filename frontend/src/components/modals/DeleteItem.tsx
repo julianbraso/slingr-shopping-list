@@ -39,7 +39,7 @@ export const DeleteItemModal = ({ open, item, cancelCallback }: Props) => {
                 }
             }}
         >
-            <Box display='flex' flexDirection='column' justifyContent='center' sx={{ px: '20px', pt: 3, height: '180px', width: '350px', padding: '30px' }}>
+            <Box display='flex' flexDirection='column' justifyContent='center' sx={{ px: '20px', pt: 3, height: '180px', maxWidth: '350px', padding: '30px' }}>
                 <Typography
                     variant='h2'
                     color='#2A323C'
