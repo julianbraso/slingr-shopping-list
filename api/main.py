@@ -1,12 +1,9 @@
+from dotenv import load_dotenv
+load_dotenv()
 from routes import items
-import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
-
-from dotenv import load_dotenv
-load_dotenv()
-
 
 app = FastAPI()
 origins = [

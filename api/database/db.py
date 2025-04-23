@@ -8,10 +8,7 @@ connection_url = os.getenv('DATABASE_URL')
 
 IS_PRODUCTION = os.getenv("ENV") != "dev"
 
-engine = create_async_engine(
-    connection_url,
-    connect_args={"statement_cache_size": 0} if IS_PRODUCTION else {}
-)
+engine = create_async_engine(connection_url, connect_args={"statement_cache_size": 0} if IS_PRODUCTION else {})
 
 SessionLocal = async_sessionmaker(
     autocommit=False, expire_on_commit=False, bind=engine, class_=AsyncSession)
