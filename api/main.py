@@ -1,3 +1,4 @@
+from routes import items
 import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -6,12 +7,12 @@ import uvicorn
 from dotenv import load_dotenv
 load_dotenv()
 
-from routes import items
 
 app = FastAPI()
 origins = [
     "http://localhost",
-    "http://localhost:5173"
+    "http://localhost:5173",
+    "https://slingr-shopping-list.vercel.app"
 ]
 app.add_middleware(
     CORSMiddleware,
