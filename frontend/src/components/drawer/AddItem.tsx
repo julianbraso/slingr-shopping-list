@@ -4,6 +4,9 @@ import { LoadingSpinner } from "../misc/LoadingSpinner";
 import { Item } from "../../types/types";
 import { createItem } from "../../utils/api";
 import { AppContext } from "../../context/AppContext";
+import { DescriptionComponent } from "./components/inputs/Description";
+import { DropdownComponent } from "./components/inputs/Dropdown";
+import { NameComponent } from "./components/inputs/Name";
 
 interface Props {
   cancelCallback: () => void;
@@ -15,6 +18,8 @@ const emptyItem = {
   quantity: 1,
   purchased: false,
 }
+
+const btnStyling = { padding: '8px 15px', fontSize: '14px', lineHeight: '20px', fontWeight: '600' }
 
 export const AddItem: React.FC<Props> = ({ cancelCallback }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -39,61 +44,9 @@ export const AddItem: React.FC<Props> = ({ cancelCallback }) => {
     <Typography variant='h2' color='#2A323C' fontSize='18px' fontWeight='400' lineHeight={'24px'}>Add an Item</Typography>
     <Typography paddingY={0.5} color='#5C6269' fontSize='16px' fontWeight='400' lineHeight='22px'>Add your new item below</Typography>
     <Box paddingY={1} sx={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-      <TextField disabled={isLoading} fullWidth placeholder="Item Name" variant="outlined" sx={{
-        mb: '2px',
-        '& .MuiInputBase-root': {
-          height: 52,
-        }, '& fieldset': {
-          borderColor: '#D5DFE9',
-        },
-      }}
-        onChange={(e) => setItem({ ...item, name: e.target.value })}
-      />
-      <Box sx={{ position: 'relative' }}>
-        <TextField
-          fullWidth
-          placeholder="Description"
-          variant="outlined"
-          disabled={isLoading}
-          sx={{
-            '& .MuiOutlinedInput-root': {
-              paddingBottom: '24px',
-            }
-          }}
-          multiline
-          rows={5}
-          onChange={(e) => setItem({ ...item, description: e.target.value })}
-        />
-        <Typography
-          variant="caption"
-          color="text.secondary"
-          sx={{
-            position: 'absolute',
-            bottom: '8px',
-            right: '14px',
-          }}
-        >
-          {0}/100
-        </Typography>
-      </Box>
-      <FormControl disabled={isLoading} fullWidth>
-        <InputLabel sx={{  bgcolor:'white' }}>How many?</InputLabel>
-        <Select
-          labelId="quantity-select-label"
-          id="quantity-select"
-          value={item.quantity}
-          onChange={(e) => setItem({ ...item, quantity: Number(e?.target.value) })}
-          sx={{
-            '& fieldset': {
-              borderColor: '#D5DFE9',
-            }
-          }}
-        >
-          <MenuItem value={1}>1</MenuItem>
-          <MenuItem value={2}>2</MenuItem>
-          <MenuItem value={3}>3</MenuItem>
-        </Select>
-      </FormControl>
+      <NameComponent item={item} onChangeCallback={(v) => setItem({ ...item, name: v })} />
+      <DescriptionComponent item={item} isLoading={isLoading} onChangeCallback={(v) => setItem({ ...item, description: v })} />
+      <DropdownComponent item={item} isLoading={isLoading} onChangeCallback={(v) => setItem({ ...item, quantity: Number(v) })} />
     </Box>
     <Box className='center' sx={{ mt: 'auto', ml: 'auto', pb: '20px', gap: '10px' }}>
       <Button
@@ -102,7 +55,7 @@ export const AddItem: React.FC<Props> = ({ cancelCallback }) => {
         disableElevation={true}
         color='inherit'
         disabled={isLoading}
-        sx={{ padding: '8px 15px', fontSize: '14px', lineHeight: '20px', fontWeight: '600' }}
+        sx={btnStyling}
       >
         Cancel
       </Button>
@@ -112,7 +65,7 @@ export const AddItem: React.FC<Props> = ({ cancelCallback }) => {
         disableElevation={true}
         color='secondary'
         disabled={isLoading || !item.name}
-        sx={{ padding: '8px 15px', fontSize: '14px', lineHeight: '20px', fontWeight: '600' }}
+        sx={btnStyling}
       >
         {isLoading ? <LoadingSpinner size="20px" sx={{ color: 'white' }} /> : 'Add Item'}
       </Button>

@@ -1,5 +1,5 @@
 from fastapi import Depends, HTTPException
-from sqlalchemy import select
+from sqlalchemy import select, update
 from sqlalchemy.ext.asyncio import AsyncSession
 from models import Item, ItemModel
 
@@ -23,20 +23,20 @@ async def add_item(item: Item, db: AsyncSession):
     return item_to_add
 
 async def update_item(item_id: int, edited_item: Item, db: AsyncSession):
-    #we get the item by its id
-    result = await db.execute(select(ItemModel).where(ItemModel.id == item_id))
-    item = result.scalar_one_or_none()
-    if item is None:
-        raise HTTPException(status_code=404, detail="Item not found")
-    
-    # we only modify the fields provided
-    for key, value in edited_item.model_dump(exclude_unset=True).items():
-        setattr(item, key, value)
-    
-    #we update it in the db
+    values_to_update = edited_item.model_dump(exclude_unset=True)
+    if not values_to_update:
+        raise HTTPException(status_code=400, detail="No fields to update")
+
+    stmt = (
+        update(ItemModel)
+        .where(ItemModel.id == item_id)
+        .values(**values_to_update)
+        .execution_options(synchronize_session="fetch")
+    )
+    await db.execute(stmt)
     await db.commit()
-    await db.refresh(item)
-    return item
+
+    return {"success": True}
 
 async def delete_item(item_id: int, db: AsyncSession):
     #we get the item by its id

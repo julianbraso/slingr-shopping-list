@@ -5,3 +5,9 @@ export interface Item {
     quantity: number;
     purchased: boolean;
 }
+
+export interface InputProps {
+    item?: Item;
+    isLoading?: boolean;
+    onChangeCallback: (v: string) => void;
+}
