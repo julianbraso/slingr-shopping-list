@@ -6,9 +6,7 @@ import { ThemeProvider } from '@mui/material'
 import theme from './mui-theme/theme.ts'
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <ThemeProvider theme={theme}>
-      <App />
-    </ThemeProvider>
-  </StrictMode>,
+  <ThemeProvider theme={theme}>
+    <App />
+  </ThemeProvider>,
 )

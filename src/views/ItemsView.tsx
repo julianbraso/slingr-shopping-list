@@ -2,8 +2,10 @@ import { Box } from "@mui/material";
 import { LoadingSpinner } from "../components/misc/LoadingSpinner";
 import EmptyListMsg from "../components/list/EmptyListMsg";
 import { ItemList } from "../components/list/ItemList";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { DrawerContext } from "../context/DrawerContext";
+import { getAllItems } from "../utils/api";
+import { Item } from "../types/types";
 
 const mockItems = [
     {
@@ -30,8 +32,15 @@ export const ItemsView = () => {
     const [isLoading, setIsLoading] = useState(false);
     const drawerContext = useContext(DrawerContext);
     ///wip
-    const [items, setItems] = useState(mockItems)
-    
+    const [items, setItems] = useState<Item[]>([])
+
+    useEffect(() => {
+        setIsLoading(true);
+        getAllItems()
+            //.then((v) => setItems(v))
+            .finally(()=> setIsLoading(false));
+    }, [])
+
     return (
         <Box className="center bodyContainer">
             {isLoading ? <LoadingSpinner /> : items.length < 1 ? <EmptyListMsg clickCallback={() => drawerContext?.openDrawer('add')} /> : <ItemList items={items} />}

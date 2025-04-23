@@ -5,7 +5,7 @@ interface Props {
 }
 
 const EmptyListMsg: React.FC<Props> = ({clickCallback}) => {
-    return <Card className='center emptyListContainer' sx={{ borderColor: 'divider' }} elevation={0}>
+    return <Card className='center emptyListContainer' sx={{ borderColor: 'divider',  mb: 'auto', mt: '12%'  }} elevation={0}>
         <Typography className='emptyListMsg' fontSize={'18px'} fontWeight={400} lineHeight={'24px'}>
             Your shopping list is empty :(
         </Typography>

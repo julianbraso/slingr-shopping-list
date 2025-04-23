@@ -18,6 +18,7 @@ export const ItemComponent: React.FC<ItemProps> = ({ item, n }) => {
     const drawerContext = useContext(DrawerContext);
     return <Card
         elevation={0}
+        key={n}
         sx={{
             paddingY: 1.5,
             border: !item.purchased ? '1px solid #D5DFE9' : 'transparent',

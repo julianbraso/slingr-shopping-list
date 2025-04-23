@@ -37,7 +37,7 @@ export const ItemList: React.FC<ListProps> = ({ items }) => {
         <Box sx={{ width: '100%', maxWidth: 1025, paddingX: 6, paddingY:4, mb: 'auto' }}>
             <Header />
             <Stack spacing={1.5} >
-                {items.map((i, n) => <ItemComponent item={i} n={n} />)}
+                {items.map((i, n) => <ItemComponent key={n} item={i} n={n} />)}
             </Stack>
         </Box>
     )
