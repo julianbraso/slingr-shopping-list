@@ -9,6 +9,7 @@ export const DescriptionComponent = ({item,isLoading,onChangeCallback}:InputProp
       disabled={isLoading}
       value={item?.description}
       variant="outlined"
+      slotProps={{ htmlInput: { maxLength: 100 } }}
       sx={{
         '& .MuiOutlinedInput-root': {
           paddingBottom: '24px',
