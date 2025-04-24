@@ -8,6 +8,7 @@ function App() {
     <AppContextProvider>
       <Box className='mainContainer'>
         <NavBar />
+        {/* here we would have routes and a router, if we had more views than the item list */}
         <ItemsView />
       </Box>
     </AppContextProvider>
