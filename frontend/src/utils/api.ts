@@ -9,7 +9,6 @@ const reusableHeaders = {
 export const getAllItems = async () => {
     const response = await fetch(API_URL);
     const data = await response.json();
-    console.log(data);
     return data;
 }
 
@@ -20,7 +19,6 @@ export const createItem = async (item: Item) => {
         body: JSON.stringify(item),
     });
     const data = await response.json();
-    console.log(data);
     return data;
 }
 
@@ -35,8 +33,7 @@ export const updateItem = async (item: Item, body?: Object) => {
         console.error("Update failed:", error);
         throw new Error(`Failed to update item: ${response.statusText}`);
     }
-    const data = await response.json();
-    console.log(data);
+    const data = await response.json();    
     return data;
 }
 
@@ -46,6 +43,5 @@ export const deleteItem = async (item: Item) => {
         headers: reusableHeaders
       });
     const data = await response.json();
-    console.log(data);
     return data;
 }
