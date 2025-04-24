@@ -47,7 +47,7 @@ export const EditItem: React.FC<Props> = ({ cancelCallback, itemToEdit }) => {
     <Typography variant='h2' color='#2A323C' fontSize='18px' fontWeight='400' lineHeight={'24px'}>Edit an Item</Typography>
     <Typography paddingY={0.5} color='#5C6269' fontSize='16px' fontWeight='400' lineHeight='22px'>Edit your item below</Typography>
     <Box paddingY={1} sx={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-      <NameComponent item={item} onChangeCallback={(v) => setItem({ ...item, name: v })} />
+      <NameComponent item={item} isLoading={isLoading} onChangeCallback={(v) => setItem({ ...item, name: v })} />
       <DescriptionComponent item={item} isLoading={isLoading} onChangeCallback={(v) => setItem({ ...item, description: v })} />
       <DropdownComponent item={item} isLoading={isLoading} onChangeCallback={(v) => setItem({ ...item, quantity: Number(v) })} />
       <CheckboxComponent />
