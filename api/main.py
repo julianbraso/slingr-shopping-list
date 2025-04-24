@@ -21,5 +21,10 @@ app.add_middleware(
 
 app.include_router(items.router, prefix="/items", tags=["items"])
 
+# this is a simple endpoint to keep the render server alive every 14min with a cron job
+@app.get("/keepalive")
+async def keepalive():
+    return { "message": "still alive..." }
+
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", reload=True)
